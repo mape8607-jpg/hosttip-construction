@@ -47,13 +47,6 @@ const projects: {
     year: "2026",
     image: "/images/obra-05.jpg",
   },
-  {
-    badge: "OBRA NUEVA",
-    name: "Residencia Unifamiliar",
-    location: "Fraccionamiento El Encanto · León",
-    year: "2021",
-    image: "/images/obra-08.jpg",
-  },
 ];
 
 const filters: ("TODOS" | BadgeType)[] = [

@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background palette */
+  --color-canvas: #0C0C0E;
+  --color-surface: #141416;
+  --color-elevated: #1C1C20;
+  --color-divider: #2A2A30;
+
+  /* Gold accent */
+  --color-gold: #C9A55A;
+  --color-gold-hover: #8A6F3A;
+
+  /* Typography */
+  --color-ink: #F2EFE8;
+  --color-ink-dim: #8A8A96;
+  --color-ink-muted: #52525C;
+
+  /* Semantic */
+  --color-positive: #3D9B6E;
+  --color-caution: #C98A2A;
+  --color-danger: #C94A4A;
+  --color-info: #4A7FC9;
+
+  /* Typography families */
+  --font-family-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Border radius */
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-ui: 200ms ease;
+}
+
+*, *::before, *::after {
+  border-color: var(--color-divider);
+}
+
+html {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-family-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-canvas);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

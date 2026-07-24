@@ -28,21 +28,9 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left — Copy */}
           <div>
-            <p
-              style={{
-                fontFamily: "var(--font-jetbrains-mono, monospace)",
-                fontSize: "11px",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#52525C",
-                marginBottom: "16px",
-              }}
-            >
-              Contacto
-            </p>
             <h2
-              className="font-semibold mb-6"
-              style={{ fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.02em", color: "#F2EFE8", lineHeight: 1.1 }}
+              className="font-light mb-6"
+              style={{ fontSize: "clamp(28px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8", lineHeight: 1.15 }}
             >
               Cuéntanos
               <br />
@@ -52,13 +40,13 @@ export default function Contact() {
               className="mb-8"
               style={{ fontSize: "16px", lineHeight: "1.7", color: "#8A8A96", maxWidth: "400px" }}
             >
-              Agenda una visita de diagnóstico para entender qué está pasando
-              con tu inmueble y qué podemos hacer. Sin compromiso.
+              Agenda una visita de diagnóstico, platícanos tu idea y
+              permítenos sorprenderte.
             </p>
 
             {/* WhatsApp alternative */}
             <a
-              href="https://wa.me/524771234567"
+              href="https://wa.me/524774112011"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 transition-colors duration-200"
@@ -79,7 +67,7 @@ export default function Contact() {
             >
               {[
                 { value: "10+", label: "Proyectos e intervenciones" },
-                { value: "2022", label: "Primera obra independiente" },
+                { value: "2022", label: "Primer proyecto independiente" },
                 { value: "León", label: "Base de operaciones" },
               ].map((s) => (
                 <div key={s.label}>

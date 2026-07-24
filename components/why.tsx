@@ -1,18 +1,30 @@
+const whatItems = [
+  "Diagnóstico y análisis inmobiliario",
+  "Diseño arquitectónico y proyecto ejecutivo",
+  "Planeación y viabilidad financiera",
+  "Ejecución de obra residencial y comercial",
+  "Remodelaciones y adecuaciones",
+  "Supervisión y dirección de obra",
+];
+
 const pillars = [
   {
     tag: "WHY",
     title: "Por qué existimos",
-    body: "El valor de un inmueble ya existe, pero está disperso. Está en las decisiones que no se tomaron, en los espacios que no se optimizaron, en la obra que arrancó sin diagnóstico. Existimos para descubrir ese valor y conectar las piezas.",
+    body: "El valor ya existe, pero está disperso. Hay que descubrirlo y conectar las piezas. Creemos que cada espacio tiene un potencial que muchas veces permanece oculto. Nuestra pasión es descubrirlo y convertirlo en decisiones que generen más valor.",
+    list: null as string[] | null,
   },
   {
     tag: "HOW",
     title: "Cómo lo logramos",
-    body: "Orquestando talento con propósito común y los recursos correctos. No somos una cuadrilla ni una empresa de diseño. Somos el hilo que une criterio estratégico, arquitectura, ejecución y control — bajo una sola responsabilidad.",
+    body: "Orquestando talento con un propósito común, conectando visión, diseño, inversión y ejecución. Entendemos la visión de nuestros clientes para diseñar soluciones donde la arquitectura, la viabilidad financiera y la ejecución encuentran equilibrio, creando valor a largo plazo.",
+    list: null as string[] | null,
   },
   {
     tag: "WHAT",
     title: "Qué hacemos",
-    body: "Descubrimos el estado real del inmueble. Diseñamos la solución con proyecto ejecutivo. Construimos — ya sea obra nueva o remodelación — con supervisión directa y entrega documentada.",
+    body: null as string | null,
+    list: whatItems,
   },
 ];
 
@@ -22,21 +34,9 @@ export default function Why() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
         {/* Header */}
         <div className="mb-20 max-w-3xl">
-          <p
-            style={{
-              fontFamily: "var(--font-jetbrains-mono, monospace)",
-              fontSize: "11px",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#52525C",
-              marginBottom: "16px",
-            }}
-          >
-            Filosofía
-          </p>
           <h2
-            className="font-semibold"
-            style={{ fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.02em", color: "#F2EFE8" }}
+            className="font-light"
+            style={{ fontSize: "clamp(28px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8" }}
           >
             Construimos con criterio,
             <br />
@@ -54,24 +54,37 @@ export default function Why() {
             >
               <span
                 style={{
-                  fontFamily: "var(--font-jetbrains-mono, monospace)",
-                  fontSize: "11px",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
+                  fontSize: "13px",
+                  letterSpacing: "0.04em",
                   color: "#C9A55A",
                 }}
               >
                 {p.tag}
               </span>
               <h3
-                className="font-semibold"
-                style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8" }}
+                style={{ fontSize: "19px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
               >
                 {p.title}
               </h3>
-              <p style={{ fontSize: "14px", lineHeight: "1.8", color: "#8A8A96" }}>
-                {p.body}
-              </p>
+
+              {p.body && (
+                <p style={{ fontSize: "14px", lineHeight: "1.8", color: "#8A8A96", fontWeight: 300 }}>
+                  {p.body}
+                </p>
+              )}
+
+              {p.list && (
+                <ul className="flex flex-col gap-3">
+                  {p.list.map((item) => (
+                    <li
+                      key={item}
+                      style={{ fontSize: "14px", color: "#8A8A96", fontWeight: 300, lineHeight: "1.5" }}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
@@ -82,10 +95,9 @@ export default function Why() {
             className="font-light"
             style={{ fontSize: "clamp(20px, 2.5vw, 28px)", letterSpacing: "-0.01em", color: "#8A8A96", lineHeight: 1.6 }}
           >
-            "La mayoría de las obras arrancan sin diagnóstico. Se construye por
-            intuición, se remodela sin números. Nosotros empezamos por entender
-            el inmueble antes de{" "}
-            <span style={{ color: "#F2EFE8", fontWeight: 500 }}>mover una piedra.</span>"
+            "Cada espacio merece ser entendido antes de intervenirse.
+            Un buen diagnóstico permite tomar{" "}
+            <span style={{ color: "#F2EFE8", fontWeight: 500 }}>mejores decisiones desde el inicio.</span>"
           </blockquote>
         </div>
       </div>

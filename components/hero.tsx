@@ -1,107 +1,79 @@
 "use client";
 
-import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section
-      className="relative flex flex-col justify-center min-h-screen px-6 lg:px-8"
-      style={{ paddingTop: "4rem" }}
-    >
-      {/* Subtle grid texture overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(201,165,90,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,165,90,0.03) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto w-full py-24 lg:py-40">
-        {/* Location badge */}
+    <section className="relative flex flex-col justify-end min-h-screen">
+      {/* Full-bleed photo — obra real, no render */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/obra-01.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover object-[50%_38%] md:object-[50%_78%]"
+          sizes="100vw"
+        />
         <div
-          className="inline-flex items-center gap-2 mb-10"
+          className="absolute inset-0"
           style={{
-            fontFamily: "var(--font-jetbrains-mono, monospace)",
-            fontSize: "11px",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "#52525C",
+            background:
+              "linear-gradient(0deg, #0C0C0E 0%, rgba(12,12,14,0.86) 22%, rgba(12,12,14,0.35) 50%, rgba(12,12,14,0.18) 75%, rgba(12,12,14,0.35) 100%)",
           }}
-        >
-          <span
-            className="inline-block w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: "#C9A55A" }}
-          />
-          León, Guanajuato · México
-        </div>
+        />
+      </div>
 
-        {/* Headline */}
-        <h1
-          className="font-semibold leading-none tracking-tight mb-8"
-          style={{
-            fontSize: "clamp(48px, 8vw, 96px)",
-            letterSpacing: "-0.02em",
-            color: "#F2EFE8",
-          }}
-        >
-          El valor ya existe.
-          <br />
-          <span style={{ color: "#C9A55A" }}>Hay que descubrirlo.</span>
-        </h1>
-
-        {/* Sub */}
+      <div className="relative max-w-7xl mx-auto w-full px-6 lg:px-8 pb-20 lg:pb-28 pt-40">
         <p
-          className="max-w-2xl mb-12"
-          style={{ fontSize: "18px", lineHeight: "1.7", color: "#8A8A96", fontWeight: 400 }}
+          style={{
+            fontSize: "13px",
+            letterSpacing: "0.04em",
+            color: "#C9A55A",
+            marginBottom: "28px",
+          }}
         >
-          Construimos obra residencial y comercial, y ejecutamos remodelaciones
-          con criterio estratégico. Primero entendemos el inmueble. Luego lo
-          transformamos.
+          León, Guanajuato
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-wrap gap-4">
-          <a
-            href="#contacto"
-            className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-lg transition-colors duration-200"
-            style={{ backgroundColor: "#C9A55A", color: "#0C0C0E", borderRadius: "8px", fontSize: "15px" }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "#8A6F3A")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "#C9A55A")}
-          >
-            Agenda tu diagnóstico
-          </a>
-          <a
-            href="#proyectos"
-            className="inline-flex items-center gap-2 font-medium px-7 py-3.5 rounded-lg transition-colors duration-200"
-            style={{
-              border: "1px solid #2A2A30",
-              color: "#8A8A96",
-              borderRadius: "8px",
-              fontSize: "15px",
-              backgroundColor: "transparent",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "#F2EFE8";
-              (e.currentTarget as HTMLElement).style.borderColor = "#8A8A96";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "#8A8A96";
-              (e.currentTarget as HTMLElement).style.borderColor = "#2A2A30";
-            }}
-          >
-            Ver proyectos
-          </a>
-        </div>
+        <h1
+          className="font-light"
+          style={{
+            fontSize: "clamp(32px, 4.6vw, 58px)",
+            lineHeight: "1.2",
+            letterSpacing: "-0.01em",
+            color: "#F2EFE8",
+            maxWidth: "20ch",
+          }}
+        >
+          El valor ya existe, pero está disperso.
+          <br />
+          <span style={{ color: "#8A8A96" }}>Hay que descubrirlo y conectar las piezas.</span>
+        </h1>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-0 flex items-center gap-2" style={{ color: "#52525C" }}>
-          <ArrowDown size={14} strokeWidth={1.5} />
-          <span style={{ fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "var(--font-jetbrains-mono, monospace)" }}>
-            Descubre el proceso
-          </span>
-        </div>
+        <p
+          className="mt-8 mb-14"
+          style={{ fontSize: "16px", lineHeight: "1.7", color: "#8A8A96", maxWidth: "42ch", fontWeight: 300 }}
+        >
+          Construimos obra residencial y comercial, y ejecutamos remodelaciones.
+          Siempre empezamos entendiendo el proyecto para tomar mejores decisiones.
+        </p>
+
+        <a
+          href="#contacto"
+          className="inline-flex items-center gap-3 transition-colors duration-200"
+          style={{ fontSize: "14px", color: "#F2EFE8", borderBottom: "1px solid #8A8A96", paddingBottom: "4px" }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "#C9A55A";
+            e.currentTarget.style.borderBottomColor = "#C9A55A";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "#F2EFE8";
+            e.currentTarget.style.borderBottomColor = "#8A8A96";
+          }}
+        >
+          Agenda tu diagnóstico
+        </a>
       </div>
     </section>
   );

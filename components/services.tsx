@@ -15,7 +15,7 @@ const services = [
       "Dirección y supervisión en sitio",
       "Control de calidad y entregas",
     ],
-    image: "/images/obra-09.jpg",
+    image: "/images/obra-residencial-comercial.jpeg",
   },
   {
     title: "Remodelaciones y Adecuaciones",

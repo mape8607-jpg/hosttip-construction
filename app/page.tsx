@@ -7,6 +7,7 @@ import Why from "@/components/why";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import WhatsappButton from "@/components/whatsapp-button";
+import SectionDivider from "@/components/section-divider";
 
 export default function Home() {
   return (
@@ -14,10 +15,15 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <SectionDivider />
         <Process />
+        <SectionDivider />
         <Services />
+        <SectionDivider />
         <Projects />
+        <SectionDivider />
         <Why />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />

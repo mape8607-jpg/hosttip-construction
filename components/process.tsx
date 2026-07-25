@@ -27,13 +27,7 @@ const steps = [
   },
 ];
 
-function StepCard({
-  step,
-  bordered,
-}: {
-  step: (typeof steps)[number];
-  bordered: boolean;
-}) {
+function StepCard({ step }: { step: (typeof steps)[number] }) {
   const [active, setActive] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -76,9 +70,8 @@ function StepCard({
           }}
         />
 
-        {/* Overlay caption — rises over the blurred photo (visual duplicate; real text stays below for a11y) */}
+        {/* Caption — only appears over the photo while it's centered/active */}
         <div
-          aria-hidden="true"
           className="absolute inset-x-0 bottom-0 p-3 md:p-6"
           style={{
             opacity: active ? 1 : 0,
@@ -97,35 +90,6 @@ function StepCard({
             {step.description}
           </p>
         </div>
-      </div>
-
-      {/* Normal-flow caption — fades out as the overlay version takes over */}
-      <div
-        className={"mt-4 md:mt-6" + (bordered ? " md:border-l md:pl-12" : "")}
-        style={{
-          borderColor: "#2A2A30",
-          opacity: active ? 0 : 1,
-          transition: "opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
-      >
-        <span
-          className="font-light"
-          style={{ fontSize: "13px", color: "#52525C", marginBottom: "8px", display: "block" }}
-        >
-          {step.id}
-        </span>
-        <h3
-          className="mb-2 md:mb-4"
-          style={{ fontSize: "16px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
-        >
-          {step.title}
-        </h3>
-        <p
-          className="hidden md:block"
-          style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}
-        >
-          {step.description}
-        </p>
       </div>
     </div>
   );
@@ -165,7 +129,7 @@ export default function Process() {
                   }}
                 />
                 <div style={{ width: "62%", marginLeft: "auto" }}>
-                  <StepCard step={step} bordered={false} />
+                  <StepCard step={step} />
                 </div>
               </div>
             ))}
@@ -196,8 +160,8 @@ export default function Process() {
 
         {/* Desktop — full grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-y-16 md:gap-x-12" style={{ paddingTop: "28px" }}>
-          {steps.map((step, i) => (
-            <StepCard key={step.id} step={step} bordered={i > 0} />
+          {steps.map((step) => (
+            <StepCard key={step.id} step={step} />
           ))}
         </div>
       </div>

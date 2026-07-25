@@ -32,7 +32,7 @@ export default function Nav() {
               alt="HOSTTIP"
               width={120}
               height={40}
-              className="h-7 w-auto"
+              className="h-11 w-auto"
               priority
               style={{ filter: "brightness(0) invert(1)" }}
             />

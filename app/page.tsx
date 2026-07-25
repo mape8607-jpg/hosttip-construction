@@ -6,6 +6,7 @@ import Projects from "@/components/projects";
 import Why from "@/components/why";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
+import WhatsappButton from "@/components/whatsapp-button";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <WhatsappButton />
     </>
   );
 }

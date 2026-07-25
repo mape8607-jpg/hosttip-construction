@@ -84,7 +84,7 @@ export default function Process() {
         <div className="md:hidden relative">
           <div
             className="absolute"
-            style={{ left: "4px", top: "10px", bottom: "10px", width: "1px", backgroundColor: "#2A2A30", zIndex: 0 }}
+            style={{ left: "17px", top: "10px", bottom: "10px", width: "1px", backgroundColor: "#2A2A30", zIndex: 0 }}
           />
           <div className="flex flex-col gap-10">
             {steps.map((step) => (
@@ -97,10 +97,11 @@ export default function Process() {
                     borderRadius: "9999px",
                     backgroundColor: "#F2EFE8",
                     marginTop: "8px",
+                    marginLeft: "13px",
                     zIndex: 1,
                   }}
                 />
-                <div className="flex flex-col gap-3" style={{ width: "62%" }}>
+                <div className="flex flex-col gap-3" style={{ width: "62%", marginLeft: "26px" }}>
                   <StepTitle step={step} />
                   <StepPhoto step={step} />
                 </div>

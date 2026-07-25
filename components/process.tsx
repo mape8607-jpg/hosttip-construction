@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 const steps = [
@@ -41,22 +44,36 @@ function StepTitle({ step }: { step: (typeof steps)[number] }) {
 }
 
 function StepPhoto({ step }: { step: (typeof steps)[number] }) {
+  const [active, setActive] = useState(false);
+
   return (
-    <div className="group relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ aspectRatio: "4 / 3" }}
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onTouchStart={() => setActive(true)}
+      onTouchEnd={() => setActive(false)}
+    >
       <Image
         src={step.image}
         alt=""
         fill
-        className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:blur-[6px]"
+        className="object-cover"
+        style={{
+          transform: active ? "scale(1.03)" : "scale(1)",
+          filter: active ? "blur(6px)" : "blur(0px)",
+          transition: "transform 300ms ease-out, filter 300ms ease-out",
+        }}
         sizes="(max-width: 768px) 45vw, 33vw"
       />
       <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-        style={{ backgroundColor: "rgba(12,12,14,0.6)" }}
+        className="absolute inset-0 transition-opacity duration-300 ease-out"
+        style={{ backgroundColor: "rgba(12,12,14,0.6)", opacity: active ? 1 : 0 }}
       />
       <div
-        className="absolute inset-0 flex items-end p-4 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-        style={{ pointerEvents: "none" }}
+        className="absolute inset-0 flex items-end p-4 md:p-6 transition-opacity duration-300 ease-out"
+        style={{ pointerEvents: "none", opacity: active ? 1 : 0 }}
       >
         <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
           {step.description}

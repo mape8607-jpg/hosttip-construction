@@ -39,14 +39,7 @@ export default function Process() {
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12">
           {steps.map((step, i) => (
-            <div
-              key={step.id}
-              className={
-                "group flex flex-col" +
-                (i > 0 ? " border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : "")
-              }
-              style={{ borderColor: "#2A2A30" }}
-            >
+            <div key={step.id} className="group flex flex-col">
               <div className="relative w-full overflow-hidden mb-6" style={{ aspectRatio: "4 / 3" }}>
                 <Image
                   src={step.image}
@@ -57,24 +50,29 @@ export default function Process() {
                 />
               </div>
 
-              <span
-                className="font-light transition-transform duration-300 ease-out group-hover:-translate-y-1"
-                style={{ fontSize: "15px", color: "#52525C", marginBottom: "20px" }}
+              <div
+                className={i > 0 ? "border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : ""}
+                style={{ borderColor: "#2A2A30" }}
               >
-                {step.id}
-              </span>
-              <h3
-                className="mb-4 transition-transform duration-300 ease-out group-hover:-translate-y-1"
-                style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
-              >
-                {step.title}
-              </h3>
-              <p
-                className="transition-transform duration-300 ease-out delay-75 group-hover:-translate-y-0.5"
-                style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}
-              >
-                {step.description}
-              </p>
+                <span
+                  className="font-light transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                  style={{ fontSize: "15px", color: "#52525C", marginBottom: "20px", display: "block" }}
+                >
+                  {step.id}
+                </span>
+                <h3
+                  className="mb-4 transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                  style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="transition-transform duration-300 ease-out delay-75 group-hover:-translate-y-0.5"
+                  style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}
+                >
+                  {step.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

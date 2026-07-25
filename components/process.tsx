@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const steps = [
@@ -24,6 +27,102 @@ const steps = [
   },
 ];
 
+function StepCard({
+  step,
+  bordered,
+}: {
+  step: (typeof steps)[number];
+  bordered: boolean;
+}) {
+  const [active, setActive] = useState(false);
+  const captionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = captionRef.current;
+    if (!el) return;
+
+    // Trigger right as the caption is about to scroll into view from the
+    // bottom, so the photo blurs and the text rises to sit over it.
+    // Reverses automatically when scrolling back up.
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { rootMargin: "0px 0px -78% 0px", threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="flex flex-col">
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+        <Image
+          src={step.image}
+          alt=""
+          fill
+          className="object-cover"
+          style={{
+            filter: active ? "blur(8px)" : "blur(0px)",
+            transform: active ? "scale(1.04)" : "scale(1)",
+            transition: "filter 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: "rgba(12,12,14,0.6)",
+            opacity: active ? 1 : 0,
+            transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        />
+
+        {/* Overlay caption — rises over the blurred photo (visual duplicate; real text stays below for a11y) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 p-6"
+          style={{
+            opacity: active ? 1 : 0,
+            transform: active ? "translateY(0)" : "translateY(14px)",
+            transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
+            pointerEvents: "none",
+          }}
+        >
+          <span className="font-light" style={{ fontSize: "15px", color: "#C9A55A", marginBottom: "12px", display: "block" }}>
+            {step.id}
+          </span>
+          <h3 className="mb-3" style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+            {step.title}
+          </h3>
+          <p style={{ fontSize: "14px", lineHeight: "1.7", color: "#F2EFE8", fontWeight: 300 }}>
+            {step.description}
+          </p>
+        </div>
+      </div>
+
+      {/* Normal-flow caption — fades out as the overlay version takes over */}
+      <div
+        ref={captionRef}
+        className={"mt-6" + (bordered ? " border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : "")}
+        style={{
+          borderColor: "#2A2A30",
+          opacity: active ? 0 : 1,
+          transition: "opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+        }}
+      >
+        <span className="font-light" style={{ fontSize: "15px", color: "#52525C", marginBottom: "20px", display: "block" }}>
+          {step.id}
+        </span>
+        <h3 className="mb-4" style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+          {step.title}
+        </h3>
+        <p style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}>
+          {step.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Process() {
   return (
     <section id="proceso" style={{ backgroundColor: "#0C0C0E" }}>
@@ -39,41 +138,7 @@ export default function Process() {
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12">
           {steps.map((step, i) => (
-            <div key={step.id} className="group flex flex-col">
-              <div className="relative w-full overflow-hidden mb-6" style={{ aspectRatio: "4 / 3" }}>
-                <Image
-                  src={step.image}
-                  alt=""
-                  fill
-                  className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:blur-[2px]"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-
-              <div
-                className={i > 0 ? "border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : ""}
-                style={{ borderColor: "#2A2A30" }}
-              >
-                <span
-                  className="font-light transition-transform duration-300 ease-out group-hover:-translate-y-1"
-                  style={{ fontSize: "15px", color: "#52525C", marginBottom: "20px", display: "block" }}
-                >
-                  {step.id}
-                </span>
-                <h3
-                  className="mb-4 transition-transform duration-300 ease-out group-hover:-translate-y-1"
-                  style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="transition-transform duration-300 ease-out delay-75 group-hover:-translate-y-0.5"
-                  style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}
-                >
-                  {step.description}
-                </p>
-              </div>
-            </div>
+            <StepCard key={step.id} step={step} bordered={i > 0} />
           ))}
         </div>
       </div>

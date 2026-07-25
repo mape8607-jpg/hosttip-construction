@@ -19,6 +19,15 @@ export default function Hero() {
       .then(() => video.pause())
       .catch(() => {});
 
+    // Tell the intro splash once there's enough buffered to play through
+    // smoothly — the splash times its fade to this, not a blind guess.
+    const announceReady = () => window.dispatchEvent(new Event("hosttip:videoready"));
+    if (video.readyState >= 4) {
+      announceReady();
+    } else {
+      video.addEventListener("canplaythrough", announceReady, { once: true });
+    }
+
     const playVideo = () => {
       video.currentTime = 0;
       video.muted = true;
@@ -27,8 +36,11 @@ export default function Hero() {
       video.play().catch(() => {});
     };
 
-    window.addEventListener("hosttip:introdone", playVideo);
-    return () => window.removeEventListener("hosttip:introdone", playVideo);
+    window.addEventListener("hosttip:startvideo", playVideo);
+    return () => {
+      video.removeEventListener("canplaythrough", announceReady);
+      window.removeEventListener("hosttip:startvideo", playVideo);
+    };
   }, []);
 
   return (

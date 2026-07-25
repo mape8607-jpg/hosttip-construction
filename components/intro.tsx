@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+const MIN_HOLD_MS = 500;
+const MAX_WAIT_MS = 4500; // fallback if the video never fires "ready"
+const VIDEO_LEAD_MS = 200; // video starts a beat before the blur clears
+const FADE_MS = 1600;
+
 export default function Intro() {
   const [phase, setPhase] = useState<"visible" | "fading" | "hidden">("visible");
   const [entered, setEntered] = useState(false);
@@ -11,24 +16,62 @@ export default function Intro() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       setPhase("hidden");
-      window.dispatchEvent(new Event("hosttip:introdone"));
+      window.dispatchEvent(new Event("hosttip:startvideo"));
       return;
     }
 
     document.body.style.overflow = "hidden";
-
     const enterFrame = requestAnimationFrame(() => setEntered(true));
-    const fadeTimer = setTimeout(() => setPhase("fading"), 500);
-    const hideTimer = setTimeout(() => {
-      setPhase("hidden");
-      document.body.style.overflow = "";
-      window.dispatchEvent(new Event("hosttip:introdone"));
-    }, 2100);
+
+    let minHoldDone = false;
+    let videoReady = false;
+    let started = false;
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    const tryStart = () => {
+      if (started || !minHoldDone || !videoReady) return;
+      started = true;
+
+      // Kick the video off first, then let the blur clear a beat later —
+      // so playback is already smooth by the time it's revealed.
+      window.dispatchEvent(new Event("hosttip:startvideo"));
+      timers.push(
+        setTimeout(() => setPhase("fading"), VIDEO_LEAD_MS)
+      );
+      timers.push(
+        setTimeout(() => {
+          setPhase("hidden");
+          document.body.style.overflow = "";
+        }, VIDEO_LEAD_MS + FADE_MS)
+      );
+    };
+
+    timers.push(
+      setTimeout(() => {
+        minHoldDone = true;
+        tryStart();
+      }, MIN_HOLD_MS)
+    );
+
+    // Safety net: never wait forever on a slow connection.
+    timers.push(
+      setTimeout(() => {
+        videoReady = true;
+        tryStart();
+      }, MAX_WAIT_MS)
+    );
+
+    const onVideoReady = () => {
+      videoReady = true;
+      tryStart();
+    };
+    window.addEventListener("hosttip:videoready", onVideoReady);
 
     return () => {
       cancelAnimationFrame(enterFrame);
-      clearTimeout(fadeTimer);
-      clearTimeout(hideTimer);
+      timers.forEach(clearTimeout);
+      window.removeEventListener("hosttip:videoready", onVideoReady);
       document.body.style.overflow = "";
     };
   }, []);
@@ -45,7 +88,7 @@ export default function Intro() {
         opacity: fading ? 0 : 1,
         filter: fading ? "blur(20px)" : "blur(0px)",
         pointerEvents: fading ? "none" : "auto",
-        transition: "opacity 1600ms cubic-bezier(0.4, 0, 0.2, 1), filter 1600ms cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: `opacity ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1), filter ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
       }}
       aria-hidden="true"
     >
@@ -60,7 +103,7 @@ export default function Intro() {
           opacity: entered ? 1 : 0,
           transform: fading ? "scale(1.3)" : entered ? "scale(1)" : "scale(0.94)",
           transition: fading
-            ? "transform 1600ms cubic-bezier(0.4, 0, 0.2, 1)"
+            ? `transform ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
             : "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       />

@@ -4,10 +4,9 @@ export default function SectionDivider() {
       <div
         style={{
           width: "100%",
-          maxWidth: "1100px",
-          height: "2px",
-          background: "linear-gradient(90deg, transparent 0%, #46464F 50%, transparent 100%)",
-          filter: "blur(0.3px)",
+          maxWidth: "100%",
+          height: "1px",
+          background: "linear-gradient(90deg, transparent 0%, #52525C 50%, transparent 100%)",
         }}
       />
     </div>

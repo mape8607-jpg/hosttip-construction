@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-type BadgeType = "OBRA NUEVA" | "REMODELACIÓN" | "PROYECTO EJECUTIVO" | "ESTRUCTURA";
+type BadgeType = "Comercial y Residencial" | "Remodelaciones y Adecuaciones" | "Diseño y Proyecto";
 
 const projects: {
   badge: BadgeType;
@@ -15,7 +15,7 @@ const projects: {
   image: string;
 }[] = [
   {
-    badge: "OBRA NUEVA",
+    badge: "Comercial y Residencial",
     name: "Locales Comerciales",
     location: "Boulevard Cañaveral · León",
     year: "2022",
@@ -25,7 +25,7 @@ const projects: {
     image: "/images/obra-residencial-comercial.jpeg",
   },
   {
-    badge: "OBRA NUEVA",
+    badge: "Comercial y Residencial",
     name: "Cimentación y Terraza",
     location: "Residencial Lomas Punta del Este · León",
     year: "2023",
@@ -35,7 +35,7 @@ const projects: {
     image: "/images/cimentacion-terraza.jpeg",
   },
   {
-    badge: "REMODELACIÓN",
+    badge: "Remodelaciones y Adecuaciones",
     name: "Terminación de Nivel",
     location: "Proyecto H40 · León",
     year: "2025",
@@ -45,7 +45,7 @@ const projects: {
     image: "/images/terminacion-nivel.jpeg",
   },
   {
-    badge: "PROYECTO EJECUTIVO",
+    badge: "Diseño y Proyecto",
     name: "Torre Tipo — Proyecto Bocanegra",
     location: "León, Gto.",
     year: "2026",
@@ -55,7 +55,7 @@ const projects: {
     image: "/images/torre-bocanegra.jpeg",
   },
   {
-    badge: "REMODELACIÓN",
+    badge: "Remodelaciones y Adecuaciones",
     name: "Remodelación de Oficina Brisas",
     location: "Oficina Brisas · Blvd. La Luz · León",
     year: "2026",
@@ -68,9 +68,9 @@ const projects: {
 
 const filters: ("TODOS" | BadgeType)[] = [
   "TODOS",
-  "OBRA NUEVA",
-  "REMODELACIÓN",
-  "PROYECTO EJECUTIVO",
+  "Comercial y Residencial",
+  "Remodelaciones y Adecuaciones",
+  "Diseño y Proyecto",
 ];
 
 export default function Projects() {
@@ -91,17 +91,19 @@ export default function Projects() {
         </h2>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-x-8 gap-y-3 mb-16">
+        <div className="flex flex-col mb-16" style={{ maxWidth: "320px", borderTop: "1px solid #2A2A30" }}>
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActive(f)}
-              className="transition-colors duration-200"
+              className="text-left transition-colors duration-200"
               style={{
-                fontSize: "13px",
+                fontSize: "14px",
                 letterSpacing: "0.02em",
                 color: active === f ? "#F2EFE8" : "#52525C",
                 background: "none",
+                padding: "14px 4px",
+                borderBottom: "1px solid #2A2A30",
               }}
               onMouseEnter={(e) => {
                 if (active !== f) e.currentTarget.style.color = "#8A8A96";
@@ -110,7 +112,7 @@ export default function Projects() {
                 if (active !== f) e.currentTarget.style.color = "#52525C";
               }}
             >
-              {f === "TODOS" ? "Todos" : f.charAt(0) + f.slice(1).toLowerCase()}
+              {f === "TODOS" ? "Todos" : f}
             </button>
           ))}
         </div>
@@ -143,7 +145,7 @@ export default function Projects() {
                       marginBottom: "10px",
                     }}
                   >
-                    {p.badge.charAt(0) + p.badge.slice(1).toLowerCase()}
+                    {p.badge}
                   </p>
                   <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
                     {p.description}

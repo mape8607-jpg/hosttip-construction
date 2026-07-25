@@ -59,11 +59,12 @@ function ServiceImage({ images, title }: { images: string[]; title: string }) {
           transform: "translateY(-50%)",
           width: "32px",
           height: "32px",
-          opacity: 0.5,
-          background: "none",
+          borderRadius: "9999px",
+          backgroundColor: "rgba(12,12,14,0.35)",
+          opacity: 0.6,
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
       >
         <ChevronLeft size={20} strokeWidth={1.25} style={{ color: "#F2EFE8" }} />
       </button>
@@ -78,11 +79,12 @@ function ServiceImage({ images, title }: { images: string[]; title: string }) {
           transform: "translateY(-50%)",
           width: "32px",
           height: "32px",
-          opacity: 0.5,
-          background: "none",
+          borderRadius: "9999px",
+          backgroundColor: "rgba(12,12,14,0.35)",
+          opacity: 0.6,
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
       >
         <ChevronRight size={20} strokeWidth={1.25} style={{ color: "#F2EFE8" }} />
       </button>

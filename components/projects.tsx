@@ -27,18 +27,18 @@ const projects: {
     image: "/images/terraza-punta.png",
   },
   {
-    badge: "PROYECTO EJECUTIVO",
-    name: "Torre Tipo — Proyecto Bocanegra",
-    location: "León, Gto.",
-    year: "2026",
-    image: "/images/torre-bocanegra.jpeg",
-  },
-  {
     badge: "REMODELACIÓN",
     name: "Terminación de Nivel",
     location: "Proyecto H40 · León",
     year: "2025",
     image: "/images/terminacion-nivel.jpeg",
+  },
+  {
+    badge: "PROYECTO EJECUTIVO",
+    name: "Torre Tipo — Proyecto Bocanegra",
+    location: "León, Gto.",
+    year: "2026",
+    image: "/images/torre-bocanegra.jpeg",
   },
   {
     badge: "ESTRUCTURA",

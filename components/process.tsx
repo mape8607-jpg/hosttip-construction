@@ -35,19 +35,18 @@ function StepCard({
   bordered: boolean;
 }) {
   const [active, setActive] = useState(false);
-  const captionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = captionRef.current;
+    const el = imageRef.current;
     if (!el) return;
 
-    // Trigger a beat before the caption would actually become visible, so
-    // it's already blurred/risen by the time it reaches the viewport edge
-    // instead of appearing first and then animating.
-    // Reverses automatically when scrolling back up.
+    // Shrinks the observation area to a single line at the exact vertical
+    // center of the viewport — the effect fires right as the photo's
+    // center is about to cross that line, and reverses on the way back up.
     const observer = new IntersectionObserver(
       ([entry]) => setActive(entry.isIntersecting),
-      { rootMargin: "0px 0px 200px 0px", threshold: 0 }
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -55,7 +54,7 @@ function StepCard({
 
   return (
     <div className="flex flex-col">
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+      <div ref={imageRef} className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
         <Image
           src={step.image}
           alt=""
@@ -102,7 +101,6 @@ function StepCard({
 
       {/* Normal-flow caption — fades out as the overlay version takes over */}
       <div
-        ref={captionRef}
         className={"mt-6" + (bordered ? " border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : "")}
         style={{
           borderColor: "#2A2A30",

@@ -24,43 +24,43 @@ const steps = [
   },
 ];
 
-function StepCard({ step }: { step: (typeof steps)[number] }) {
+function StepTitle({ step }: { step: (typeof steps)[number] }) {
   return (
-    <div className="group flex flex-col">
-      {/* Number + title — static, always visible, above the photo */}
-      <div className="mb-3 md:mb-4">
-        <span
-          className="font-light"
-          style={{ fontSize: "13px", color: "#C9A55A", marginBottom: "6px", display: "block" }}
-        >
-          {step.id}
-        </span>
-        <h3 style={{ fontSize: "16px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
-          {step.title}
-        </h3>
-      </div>
+    <div>
+      <span
+        className="font-light"
+        style={{ fontSize: "13px", color: "#C9A55A", marginBottom: "6px", display: "block" }}
+      >
+        {step.id}
+      </span>
+      <h3 style={{ fontSize: "16px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+        {step.title}
+      </h3>
+    </div>
+  );
+}
 
-      {/* Photo — description only appears on hover / touch */}
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
-        <Image
-          src={step.image}
-          alt=""
-          fill
-          className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:blur-[6px]"
-          sizes="(max-width: 768px) 45vw, 33vw"
-        />
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-          style={{ backgroundColor: "rgba(12,12,14,0.6)" }}
-        />
-        <div
-          className="absolute inset-0 flex items-end p-4 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-          style={{ pointerEvents: "none" }}
-        >
-          <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
-            {step.description}
-          </p>
-        </div>
+function StepPhoto({ step }: { step: (typeof steps)[number] }) {
+  return (
+    <div className="group relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+      <Image
+        src={step.image}
+        alt=""
+        fill
+        className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:blur-[6px]"
+        sizes="(max-width: 768px) 45vw, 33vw"
+      />
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+        style={{ backgroundColor: "rgba(12,12,14,0.6)" }}
+      />
+      <div
+        className="absolute inset-0 flex items-end p-4 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+        style={{ pointerEvents: "none" }}
+      >
+        <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
+          {step.description}
+        </p>
       </div>
     </div>
   );
@@ -99,16 +99,24 @@ export default function Process() {
                     marginTop: "8px",
                   }}
                 />
-                <div style={{ width: "62%", marginLeft: "auto" }}>
-                  <StepCard step={step} />
+                <div className="flex flex-col gap-3" style={{ width: "62%", marginLeft: "auto" }}>
+                  <StepTitle step={step} />
+                  <StepPhoto step={step} />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Desktop — thread connecting the three moments */}
-        <div className="hidden md:block relative" style={{ height: "10px", marginBottom: "-10px" }}>
+        {/* Desktop — titles row */}
+        <div className="hidden md:grid md:grid-cols-3 gap-x-12">
+          {steps.map((step) => (
+            <StepTitle key={step.id} step={step} />
+          ))}
+        </div>
+
+        {/* Desktop — thread connecting the three moments, between titles and photos */}
+        <div className="hidden md:block relative" style={{ height: "10px", margin: "24px 0" }}>
           <div
             className="absolute"
             style={{ top: "50%", left: "16.667%", right: "16.667%", height: "1px", backgroundColor: "#2A2A30" }}
@@ -129,10 +137,10 @@ export default function Process() {
           </div>
         </div>
 
-        {/* Desktop — full grid */}
-        <div className="hidden md:grid md:grid-cols-3 gap-y-16 md:gap-x-12" style={{ paddingTop: "28px" }}>
+        {/* Desktop — photos row */}
+        <div className="hidden md:grid md:grid-cols-3 md:gap-x-12">
           {steps.map((step) => (
-            <StepCard key={step.id} step={step} />
+            <StepPhoto key={step.id} step={step} />
           ))}
         </div>
       </div>

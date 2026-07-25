@@ -32,7 +32,7 @@ const projects: {
     role: "Dirección integral independiente",
     description:
       "Proyecto ejecutado de inicio a fin de forma independiente. Terraza sobre terreno con pendiente pronunciada, diseñada como base de cimentación para vivienda futura.",
-    image: "/images/terraza-punta.png",
+    image: "/images/cimentacion-terraza.jpeg",
   },
   {
     badge: "REMODELACIÓN",

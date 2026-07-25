@@ -83,8 +83,13 @@ export default function Services() {
                   {s.points.map((p) => (
                     <li
                       key={p}
+                      className="flex items-center gap-3"
                       style={{ fontSize: "14px", color: "#8A8A96", fontWeight: 300 }}
                     >
+                      <span
+                        className="inline-block flex-shrink-0"
+                        style={{ width: "4px", height: "4px", borderRadius: "9999px", backgroundColor: "#C9A55A" }}
+                      />
                       {p}
                     </li>
                   ))}

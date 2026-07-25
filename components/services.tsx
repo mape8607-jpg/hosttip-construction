@@ -28,7 +28,7 @@ const services = [
       "Reforzamientos y mejoras constructivas",
       "Ejecución y supervisión de la intervención",
     ],
-    image: "/images/obra-05.jpg",
+    image: "/images/obra-remodelaciones-adecuaciones.jpeg",
   },
 ];
 

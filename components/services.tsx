@@ -119,13 +119,27 @@ export default function Services() {
                 (i % 2 === 1 ? " lg:[direction:rtl]" : "")
               }
             >
-              <div className="order-2 lg:order-none">
-                <ServiceImage images={s.images} title={s.title} />
-              </div>
+              {/* Mobile-only: title above the image. Desktop shows the title inside the text block instead. */}
+              <h3
+                className="mb-5 lg:hidden"
+                style={{
+                  fontSize: "26px",
+                  letterSpacing: "-0.01em",
+                  color: "#F2EFE8",
+                  fontWeight: 500,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "6px",
+                  textDecorationColor: "#2A2A30",
+                }}
+              >
+                {i + 1}. {s.title}
+              </h3>
 
-              <div className="order-1 lg:order-none" style={{ direction: "ltr" }}>
+              <ServiceImage images={s.images} title={s.title} />
+
+              <div style={{ direction: "ltr" }}>
                 <h3
-                  className="mb-5"
+                  className="mb-5 hidden lg:block"
                   style={{
                     fontSize: "26px",
                     letterSpacing: "-0.01em",

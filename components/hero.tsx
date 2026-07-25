@@ -68,17 +68,6 @@ export default function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto w-full px-6 lg:px-8 pb-20 lg:pb-28 pt-40">
-        <p
-          style={{
-            fontSize: "13px",
-            letterSpacing: "0.04em",
-            color: "#0C0C0E",
-            marginBottom: "28px",
-            fontWeight: 600,
-          }}
-        >
-          León, Guanajuato
-        </p>
 
         <h1
           className="font-light"
@@ -116,7 +105,7 @@ export default function Hero() {
             textDecorationColor: "#8A8A96",
           }}
         >
-          Diseño y Obra
+          Diseño y Construcción
         </p>
         <p
           className="mb-14"

@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const steps = [
@@ -28,65 +25,39 @@ const steps = [
 ];
 
 function StepCard({ step }: { step: (typeof steps)[number] }) {
-  const [active, setActive] = useState(false);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = imageRef.current;
-    if (!el) return;
-
-    // Shrinks the observation area to a single line at the exact vertical
-    // center of the viewport — the effect fires right as the photo's
-    // center is about to cross that line, and reverses on the way back up.
-    const observer = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div className="flex flex-col">
-      <div ref={imageRef} className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+    <div className="group flex flex-col">
+      {/* Number + title — static, always visible, above the photo */}
+      <div className="mb-3 md:mb-4">
+        <span
+          className="font-light"
+          style={{ fontSize: "13px", color: "#C9A55A", marginBottom: "6px", display: "block" }}
+        >
+          {step.id}
+        </span>
+        <h3 style={{ fontSize: "16px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+          {step.title}
+        </h3>
+      </div>
+
+      {/* Photo — description only appears on hover / touch */}
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
         <Image
           src={step.image}
           alt=""
           fill
-          className="object-cover"
-          style={{
-            filter: active ? "blur(8px)" : "blur(0px)",
-            transform: active ? "scale(1.04)" : "scale(1)",
-            transition: "filter 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
-          }}
+          className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:blur-[6px]"
           sizes="(max-width: 768px) 45vw, 33vw"
         />
         <div
-          className="absolute inset-0"
-          style={{
-            backgroundColor: "rgba(12,12,14,0.6)",
-            opacity: active ? 1 : 0,
-            transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1)",
-          }}
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+          style={{ backgroundColor: "rgba(12,12,14,0.6)" }}
         />
-
-        {/* Caption — only appears over the photo while it's centered/active */}
         <div
-          className="absolute inset-x-0 bottom-0 p-3 md:p-6"
-          style={{
-            opacity: active ? 1 : 0,
-            transform: active ? "translateY(0)" : "translateY(14px)",
-            transition: "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
-            pointerEvents: "none",
-          }}
+          className="absolute inset-0 flex items-end p-4 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+          style={{ pointerEvents: "none" }}
         >
-          <span className="font-light" style={{ fontSize: "12px", color: "#C9A55A", marginBottom: "6px", display: "block" }}>
-            {step.id}
-          </span>
-          <h3 className="mb-2 md:mb-3" style={{ fontSize: "14px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
-            {step.title}
-          </h3>
-          <p className="hidden md:block" style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
+          <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
             {step.description}
           </p>
         </div>
@@ -116,7 +87,7 @@ export default function Process() {
             style={{ left: "4px", top: "10px", bottom: "10px", width: "1px", backgroundColor: "#2A2A30" }}
           />
           <div className="flex flex-col gap-10">
-            {steps.map((step, i) => (
+            {steps.map((step) => (
               <div key={step.id} className="flex items-start gap-5">
                 <span
                   className="flex-shrink-0"

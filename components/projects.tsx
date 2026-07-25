@@ -17,7 +17,7 @@ const projects: {
     name: "Locales Comerciales",
     location: "Boulevard Cañaveral · León",
     year: "2022",
-    image: "/images/locales-canaveral.png",
+    image: "/images/obra-residencial-comercial.jpeg",
   },
   {
     badge: "OBRA NUEVA",

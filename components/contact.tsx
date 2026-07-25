@@ -66,7 +66,7 @@ export default function Contact() {
               style={{ borderTop: "1px solid #2A2A30" }}
             >
               {[
-                { value: "10+", label: "Proyectos e intervenciones" },
+                { value: "7+", label: "Proyectos e intervenciones" },
                 { value: "2022", label: "Primer proyecto independiente" },
                 { value: "León", label: "Base de operaciones" },
               ].map((s) => (

@@ -18,11 +18,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4 max-w-xs">
             <Image
-              src="/logo.png"
+              src="/logo-icon.png"
               alt="HOSTTIP"
-              width={140}
-              height={140}
-              className="h-16 w-auto"
+              width={698}
+              height={504}
+              className="h-12 w-auto"
             />
             <p style={{ fontSize: "13px", lineHeight: "1.7", color: "#52525C" }}>
               Construimos con criterio, no con inercia.

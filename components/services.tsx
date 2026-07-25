@@ -72,9 +72,17 @@ export default function Services() {
               <div style={{ direction: "ltr" }}>
                 <h3
                   className="mb-5"
-                  style={{ fontSize: "26px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
+                  style={{
+                    fontSize: "26px",
+                    letterSpacing: "-0.01em",
+                    color: "#F2EFE8",
+                    fontWeight: 500,
+                    textDecoration: "underline",
+                    textUnderlineOffset: "6px",
+                    textDecorationColor: "#2A2A30",
+                  }}
                 >
-                  {s.title}
+                  {i + 1}. {s.title}
                 </h3>
                 <p className="mb-8" style={{ fontSize: "15px", lineHeight: "1.8", color: "#8A8A96", fontWeight: 300, maxWidth: "48ch" }}>
                   {s.description}

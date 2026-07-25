@@ -65,7 +65,7 @@ function StepCard({
             transform: active ? "scale(1.04)" : "scale(1)",
             transition: "filter 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
           }}
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 45vw, 33vw"
         />
         <div
           className="absolute inset-0"
@@ -79,7 +79,7 @@ function StepCard({
         {/* Overlay caption — rises over the blurred photo (visual duplicate; real text stays below for a11y) */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 p-6"
+          className="absolute inset-x-0 bottom-0 p-3 md:p-6"
           style={{
             opacity: active ? 1 : 0,
             transform: active ? "translateY(0)" : "translateY(14px)",
@@ -87,13 +87,13 @@ function StepCard({
             pointerEvents: "none",
           }}
         >
-          <span className="font-light" style={{ fontSize: "15px", color: "#C9A55A", marginBottom: "12px", display: "block" }}>
+          <span className="font-light" style={{ fontSize: "12px", color: "#C9A55A", marginBottom: "6px", display: "block" }}>
             {step.id}
           </span>
-          <h3 className="mb-3" style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+          <h3 className="mb-2 md:mb-3" style={{ fontSize: "14px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
             {step.title}
           </h3>
-          <p style={{ fontSize: "14px", lineHeight: "1.7", color: "#F2EFE8", fontWeight: 300 }}>
+          <p className="hidden md:block" style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
             {step.description}
           </p>
         </div>
@@ -101,20 +101,29 @@ function StepCard({
 
       {/* Normal-flow caption — fades out as the overlay version takes over */}
       <div
-        className={"mt-6" + (bordered ? " border-t md:border-t-0 md:border-l pt-8 md:pt-0 md:pl-12" : "")}
+        className={"mt-4 md:mt-6" + (bordered ? " md:border-l md:pl-12" : "")}
         style={{
           borderColor: "#2A2A30",
           opacity: active ? 0 : 1,
           transition: "opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
-        <span className="font-light" style={{ fontSize: "15px", color: "#52525C", marginBottom: "20px", display: "block" }}>
+        <span
+          className="font-light"
+          style={{ fontSize: "13px", color: "#52525C", marginBottom: "8px", display: "block" }}
+        >
           {step.id}
         </span>
-        <h3 className="mb-4" style={{ fontSize: "20px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+        <h3
+          className="mb-2 md:mb-4"
+          style={{ fontSize: "16px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}
+        >
           {step.title}
         </h3>
-        <p style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}>
+        <p
+          className="hidden md:block"
+          style={{ fontSize: "14px", lineHeight: "1.75", color: "#8A8A96", fontWeight: 300 }}
+        >
           {step.description}
         </p>
       </div>
@@ -128,13 +137,42 @@ export default function Process() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-28 lg:pt-40 pb-14 lg:pb-20">
         {/* Header */}
         <h2
-          className="font-light mb-20 lg:mb-28 whitespace-nowrap"
-          style={{ fontSize: "clamp(22px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8" }}
+          className="font-light mb-16 md:mb-20 lg:mb-28 md:whitespace-nowrap"
+          style={{ fontSize: "clamp(26px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8" }}
         >
-          Tres momentos, un solo hilo de responsabilidad.
+          Tres momentos,
+          <br className="md:hidden" />
+          un solo hilo de responsabilidad.
         </h2>
 
-        {/* Thread connecting the three moments — desktop only */}
+        {/* Mobile — vertical timeline: line + 3 dots on the left, small images to the right */}
+        <div className="md:hidden relative">
+          <div
+            className="absolute"
+            style={{ left: "4px", top: "10px", bottom: "10px", width: "1px", backgroundColor: "#2A2A30" }}
+          />
+          <div className="flex flex-col gap-10">
+            {steps.map((step, i) => (
+              <div key={step.id} className="flex items-start gap-5">
+                <span
+                  className="flex-shrink-0"
+                  style={{
+                    width: "9px",
+                    height: "9px",
+                    borderRadius: "9999px",
+                    backgroundColor: "#F2EFE8",
+                    marginTop: "8px",
+                  }}
+                />
+                <div style={{ width: "62%", marginLeft: "auto" }}>
+                  <StepCard step={step} bordered={false} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop — thread connecting the three moments */}
         <div className="hidden md:block relative" style={{ height: "10px", marginBottom: "-10px" }}>
           <div
             className="absolute"
@@ -156,8 +194,8 @@ export default function Process() {
           </div>
         </div>
 
-        {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12" style={{ paddingTop: "28px" }}>
+        {/* Desktop — full grid */}
+        <div className="hidden md:grid md:grid-cols-3 gap-y-16 md:gap-x-12" style={{ paddingTop: "28px" }}>
           {steps.map((step, i) => (
             <StepCard key={step.id} step={step} bordered={i > 0} />
           ))}

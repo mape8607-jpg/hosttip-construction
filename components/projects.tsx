@@ -66,16 +66,15 @@ const projects: {
   },
 ];
 
-const filters: ("TODOS" | BadgeType)[] = [
-  "TODOS",
+const filters: BadgeType[] = [
   "Comercial y Residencial",
   "Remodelaciones y Adecuaciones",
   "Diseño y Proyecto",
 ];
 
 export default function Projects() {
-  const [active, setActive] = useState<"TODOS" | BadgeType>("TODOS");
-  const visible = active === "TODOS" ? projects : projects.filter((p) => p.badge === active);
+  const [active, setActive] = useState<BadgeType | null>(null);
+  const visible = active === null ? projects : projects.filter((p) => p.badge === active);
 
   return (
     <section id="proyectos" style={{ backgroundColor: "#0C0C0E" }}>
@@ -95,7 +94,7 @@ export default function Projects() {
           {filters.map((f) => (
             <button
               key={f}
-              onClick={() => setActive(f)}
+              onClick={() => setActive(active === f ? null : f)}
               className="text-left transition-colors duration-200"
               style={{
                 fontSize: "14px",
@@ -112,7 +111,7 @@ export default function Projects() {
                 if (active !== f) e.currentTarget.style.color = "#52525C";
               }}
             >
-              {f === "TODOS" ? "Todos" : f}
+              {f}
             </button>
           ))}
         </div>

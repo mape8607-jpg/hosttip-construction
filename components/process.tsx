@@ -125,17 +125,39 @@ function StepCard({
 export default function Process() {
   return (
     <section id="proceso" style={{ backgroundColor: "#0C0C0E" }}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-28 lg:py-40">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-28 lg:pt-40 pb-14 lg:pb-20">
         {/* Header */}
         <h2
-          className="font-light mb-20 lg:mb-28"
-          style={{ fontSize: "clamp(28px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8", maxWidth: "20ch" }}
+          className="font-light mb-20 lg:mb-28 whitespace-nowrap"
+          style={{ fontSize: "clamp(22px, 3.2vw, 40px)", letterSpacing: "-0.01em", color: "#F2EFE8" }}
         >
           Tres momentos, un solo hilo de responsabilidad.
         </h2>
 
+        {/* Thread connecting the three moments — desktop only */}
+        <div className="hidden md:block relative" style={{ height: "10px", marginBottom: "-10px" }}>
+          <div
+            className="absolute"
+            style={{ top: "50%", left: "16.667%", right: "16.667%", height: "1px", backgroundColor: "#2A2A30" }}
+          />
+          <div className="grid grid-cols-3 gap-x-12 relative h-full">
+            {steps.map((step) => (
+              <div key={step.id} className="flex items-center justify-center">
+                <span
+                  style={{
+                    width: "6px",
+                    height: "6px",
+                    borderRadius: "9999px",
+                    backgroundColor: "#F2EFE8",
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12" style={{ paddingTop: "28px" }}>
           {steps.map((step, i) => (
             <StepCard key={step.id} step={step} bordered={i > 0} />
           ))}

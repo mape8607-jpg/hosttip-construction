@@ -71,7 +71,6 @@ const filters: ("TODOS" | BadgeType)[] = [
   "OBRA NUEVA",
   "REMODELACIÓN",
   "PROYECTO EJECUTIVO",
-  "ESTRUCTURA",
 ];
 
 export default function Projects() {

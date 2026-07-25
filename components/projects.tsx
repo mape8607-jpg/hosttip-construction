@@ -41,11 +41,11 @@ const projects: {
     image: "/images/torre-bocanegra.jpeg",
   },
   {
-    badge: "ESTRUCTURA",
-    name: "Diagnóstico y Reparación Estructural",
-    location: "Local Brisas · Blvd. La Luz · León",
+    badge: "REMODELACIÓN",
+    name: "Remodelación de Oficina Brisas",
+    location: "Oficina Brisas · Blvd. La Luz · León",
     year: "2026",
-    image: "/images/obra-05.jpg",
+    image: "/images/oficina-brisas.jpeg",
   },
 ];
 

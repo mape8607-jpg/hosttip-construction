@@ -1,20 +1,26 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
+import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
+  const [ended, setEnded] = useState(false);
+
   return (
     <section className="relative flex flex-col justify-end min-h-screen">
-      {/* Full-bleed photo — obra real, no render */}
+      {/* Full-bleed video — plays once */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/obra-01.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover object-[50%_38%] md:object-[50%_78%]"
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => setEnded(true)}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: "50% 50%" }}
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
         <div
           className="absolute inset-0"
           style={{
@@ -74,6 +80,25 @@ export default function Hero() {
         >
           Agenda tu diagnóstico
         </a>
+
+        {/* Appears once the video finishes playing */}
+        <div
+          className="absolute left-6 lg:left-8 bottom-8 flex flex-col items-center gap-2 transition-opacity duration-700 ease-out"
+          style={{ opacity: ended ? 1 : 0 }}
+          aria-hidden={!ended}
+        >
+          <span
+            style={{
+              fontSize: "11px",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#F2EFE8",
+            }}
+          >
+            Desliza hacia abajo
+          </span>
+          <ArrowDown size={16} strokeWidth={1.5} style={{ color: "#F2EFE8" }} />
+        </div>
       </div>
     </section>
   );

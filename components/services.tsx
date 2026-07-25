@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const services = [
   {
@@ -15,7 +17,7 @@ const services = [
       "Dirección y supervisión en sitio",
       "Control de calidad y entregas",
     ],
-    image: "/images/obra-residencial-comercial.jpeg",
+    images: ["/images/obra-residencial-comercial.jpeg"],
   },
   {
     title: "Remodelaciones y Adecuaciones",
@@ -28,9 +30,65 @@ const services = [
       "Reforzamientos y mejoras constructivas",
       "Ejecución y supervisión de la intervención",
     ],
-    image: "/images/obra-remodelaciones-adecuaciones.jpeg",
+    images: ["/images/obra-remodelaciones-adecuaciones.jpeg"],
   },
 ];
+
+function ServiceImage({ images, title }: { images: string[]; title: string }) {
+  const [index, setIndex] = useState(0);
+  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
+  const next = () => setIndex((i) => (i + 1) % images.length);
+
+  return (
+    <div className="group relative w-full" style={{ aspectRatio: "4 / 3", direction: "ltr" }}>
+      <Image
+        src={images[index]}
+        alt={title}
+        fill
+        className="object-cover"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+      />
+
+      <button
+        onClick={prev}
+        aria-label="Foto anterior"
+        className="absolute flex items-center justify-center transition-opacity duration-200"
+        style={{
+          left: "12px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: "32px",
+          height: "32px",
+          opacity: 0.5,
+          background: "none",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+      >
+        <ChevronLeft size={20} strokeWidth={1.25} style={{ color: "#F2EFE8" }} />
+      </button>
+
+      <button
+        onClick={next}
+        aria-label="Foto siguiente"
+        className="absolute flex items-center justify-center transition-opacity duration-200"
+        style={{
+          right: "12px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: "32px",
+          height: "32px",
+          opacity: 0.5,
+          background: "none",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+      >
+        <ChevronRight size={20} strokeWidth={1.25} style={{ color: "#F2EFE8" }} />
+      </button>
+    </div>
+  );
+}
 
 export default function Services() {
   return (
@@ -59,15 +117,7 @@ export default function Services() {
                 (i % 2 === 1 ? " lg:[direction:rtl]" : "")
               }
             >
-              <div className="relative w-full" style={{ aspectRatio: "4 / 3", direction: "ltr" }}>
-                <Image
-                  src={s.image}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
+              <ServiceImage images={s.images} title={s.title} />
 
               <div style={{ direction: "ltr" }}>
                 <h3

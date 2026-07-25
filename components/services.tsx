@@ -119,9 +119,11 @@ export default function Services() {
                 (i % 2 === 1 ? " lg:[direction:rtl]" : "")
               }
             >
-              <ServiceImage images={s.images} title={s.title} />
+              <div className="order-2 lg:order-none">
+                <ServiceImage images={s.images} title={s.title} />
+              </div>
 
-              <div style={{ direction: "ltr" }}>
+              <div className="order-1 lg:order-none" style={{ direction: "ltr" }}>
                 <h3
                   className="mb-5"
                   style={{

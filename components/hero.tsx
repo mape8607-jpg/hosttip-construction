@@ -87,7 +87,7 @@ export default function Hero() {
               fontSize: "clamp(16px, 2.3vw, 29px)",
               fontWeight: 600,
               display: "inline-block",
-              marginTop: "6px",
+              marginTop: "3.6px",
             }}
           >
             Hay que descubrirlo y conectar las piezas.

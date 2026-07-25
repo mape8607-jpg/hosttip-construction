@@ -10,6 +10,8 @@ const projects: {
   name: string;
   location: string;
   year: string;
+  role: string;
+  description: string;
   image: string;
 }[] = [
   {
@@ -17,6 +19,9 @@ const projects: {
     name: "Locales Comerciales",
     location: "Boulevard Cañaveral · León",
     year: "2022",
+    role: "Residencia de obra · ciclo completo",
+    description:
+      "Responsabilidad integral desde el levantamiento topográfico hasta la entrega. Proyecto ejecutivo, dos locales con mampostería, firmes de concreto y estructura metálica.",
     image: "/images/obra-residencial-comercial.jpeg",
   },
   {
@@ -24,6 +29,9 @@ const projects: {
     name: "Cimentación y Terraza",
     location: "Residencial Lomas Punta del Este · León",
     year: "2023",
+    role: "Dirección integral independiente",
+    description:
+      "Proyecto ejecutado de inicio a fin de forma independiente. Terraza sobre terreno con pendiente pronunciada, diseñada como base de cimentación para vivienda futura.",
     image: "/images/terraza-punta.png",
   },
   {
@@ -31,6 +39,9 @@ const projects: {
     name: "Terminación de Nivel",
     location: "Proyecto H40 · León",
     year: "2025",
+    role: "Coordinación de subcontratistas",
+    description:
+      "Conclusión del nivel pendiente coordinando directamente fontanería, vidrio y aluminio, carpintería y limpieza de puesta en marcha. Incorporación de ocho nuevas puertas.",
     image: "/images/terminacion-nivel.jpeg",
   },
   {
@@ -38,6 +49,9 @@ const projects: {
     name: "Torre Tipo — Proyecto Bocanegra",
     location: "León, Gto.",
     year: "2026",
+    role: "Proyecto ejecutivo en entorno BIM",
+    description:
+      "Desarrollo del proyecto ejecutivo de una torre tipo para conjunto de torres, con análisis de precios unitarios e integración de especialistas en BIM.",
     image: "/images/torre-bocanegra.jpeg",
   },
   {
@@ -45,6 +59,9 @@ const projects: {
     name: "Remodelación de Oficina Brisas",
     location: "Oficina Brisas · Blvd. La Luz · León",
     year: "2026",
+    role: "Remodelación integral",
+    description:
+      "Remodelación de oficina con muros de cristal, acabados nuevos y mobiliario a medida — entregada lista para operar.",
     image: "/images/oficina-brisas.jpeg",
   },
 ];
@@ -99,18 +116,50 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Grid — pure images, minimal caption */}
+        {/* Grid — hover reveals description over the photo */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
           {visible.map((p) => (
             <article key={p.name + p.year} className="group flex flex-col">
-              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 5" }}>
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 5", borderRadius: "4px" }}>
                 <Image
                   src={p.image}
                   alt={p.name}
                   fill
-                  className="object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+                  className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.05]"
+                  style={{ filter: "blur(0px)" }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
+                  style={{ backgroundColor: "rgba(12,12,14,0.55)", backdropFilter: "blur(6px)" }}
+                />
+                <div
+                  className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                >
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      letterSpacing: "0.03em",
+                      color: "#C9A55A",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {p.badge.charAt(0) + p.badge.slice(1).toLowerCase()}
+                  </p>
+                  <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
+                    {p.description}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "11px",
+                      letterSpacing: "0.03em",
+                      color: "#8A8A96",
+                      marginTop: "12px",
+                    }}
+                  >
+                    {p.role}
+                  </p>
+                </div>
               </div>
 
               <div className="flex items-baseline justify-between gap-3 mt-5">

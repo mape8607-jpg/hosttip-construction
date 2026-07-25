@@ -20,7 +20,7 @@ export default function Footer() {
             <Image
               src="/logo-icon.png"
               alt="HOSTTIP"
-              width={698}
+              width={628}
               height={504}
               className="h-12 w-auto"
             />

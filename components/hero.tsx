@@ -92,7 +92,17 @@ export default function Hero() {
         >
           El valor ya existe, pero está disperso.
           <br />
-          <span style={{ color: "#8A8A96" }}>Hay que descubrirlo y conectar las piezas.</span>
+          <span
+            style={{
+              color: "#8A8A96",
+              fontSize: "clamp(16px, 2.3vw, 29px)",
+              fontWeight: 600,
+              display: "inline-block",
+              marginTop: "6px",
+            }}
+          >
+            Hay que descubrirlo y conectar las piezas.
+          </span>
         </h1>
 
         <p

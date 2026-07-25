@@ -1,17 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   const [ended, setEnded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Prime the decoder while it's still hidden behind the intro splash, so
+    // the real play() call later has zero startup lag (no visible gap
+    // between the splash clearing and the first frame showing).
+    video.muted = true;
+    video.play()
+      .then(() => video.pause())
+      .catch(() => {});
+
+    const playVideo = () => {
+      video.currentTime = 0;
+      video.muted = true;
+      // Setting muted imperatively (not just via prop) is what makes Safari
+      // honor the autoplay policy reliably on first paint.
+      video.play().catch(() => {});
+    };
+
+    window.addEventListener("hosttip:introdone", playVideo);
+    return () => window.removeEventListener("hosttip:introdone", playVideo);
+  }, []);
 
   return (
     <section className="relative flex flex-col justify-end min-h-screen">
-      {/* Full-bleed video — plays once */}
+      {/* Full-bleed video — starts once the intro splash clears, plays once */}
       <div className="absolute inset-0">
         <video
-          autoPlay
+          ref={videoRef}
           muted
           playsInline
           preload="auto"

@@ -11,6 +11,7 @@ export default function Intro() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       setPhase("hidden");
+      window.dispatchEvent(new Event("hosttip:introdone"));
       return;
     }
 
@@ -21,6 +22,7 @@ export default function Intro() {
     const hideTimer = setTimeout(() => {
       setPhase("hidden");
       document.body.style.overflow = "";
+      window.dispatchEvent(new Event("hosttip:introdone"));
     }, 2100);
 
     return () => {

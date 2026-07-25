@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 
 type BadgeType = "Comercial y Residencial" | "Remodelaciones y Adecuaciones" | "Diseño y Proyecto";
@@ -71,6 +72,55 @@ const categories: BadgeType[] = [
   "Diseño y Proyecto",
 ];
 
+function ProjectCard({ p }: { p: (typeof projects)[number] }) {
+  const [active, setActive] = useState(false);
+
+  return (
+    <article
+      className="flex flex-col"
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onTouchStart={() => setActive(true)}
+      onTouchEnd={() => setActive(false)}
+    >
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 5", borderRadius: "4px" }}>
+        <Image
+          src={p.image}
+          alt={p.name}
+          fill
+          className="object-cover transition-transform duration-300 ease-out"
+          style={{ transform: active ? "scale(1.05)" : "scale(1)" }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+        <div
+          className="absolute inset-0 transition-opacity duration-300 ease-out"
+          style={{ backgroundColor: "rgba(12,12,14,0.55)", backdropFilter: "blur(6px)", opacity: active ? 1 : 0 }}
+        />
+        <div
+          className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-300 ease-out"
+          style={{ opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(8px)" }}
+        >
+          <p style={{ fontSize: "12px", letterSpacing: "0.03em", color: "#C9A55A", marginBottom: "10px" }}>
+            {p.badge}
+          </p>
+          <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
+            {p.description}
+          </p>
+          <p style={{ fontSize: "11px", letterSpacing: "0.03em", color: "#8A8A96", marginTop: "12px" }}>
+            {p.role}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-baseline justify-between gap-3 mt-5">
+        <h3 style={{ fontSize: "16px", color: "#F2EFE8", fontWeight: 400 }}>{p.name}</h3>
+        <span style={{ fontSize: "13px", color: "#52525C" }}>{p.year}</span>
+      </div>
+      <p style={{ fontSize: "13px", color: "#8A8A96", marginTop: "4px" }}>{p.location}</p>
+    </article>
+  );
+}
+
 export default function Projects() {
   return (
     <section id="proyectos" style={{ backgroundColor: "#0C0C0E" }}>
@@ -109,38 +159,7 @@ export default function Projects() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
                   {items.map((p) => (
-                    <article key={p.name + p.year} className="group flex flex-col">
-                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 5", borderRadius: "4px" }}>
-                        <Image
-                          src={p.image}
-                          alt={p.name}
-                          fill
-                          className="object-cover transition-all duration-300 ease-out group-hover:scale-[1.05]"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                        <div
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"
-                          style={{ backgroundColor: "rgba(12,12,14,0.55)", backdropFilter: "blur(6px)" }}
-                        />
-                        <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
-                          <p style={{ fontSize: "12px", letterSpacing: "0.03em", color: "#C9A55A", marginBottom: "10px" }}>
-                            {p.badge}
-                          </p>
-                          <p style={{ fontSize: "13px", lineHeight: "1.6", color: "#F2EFE8", fontWeight: 300 }}>
-                            {p.description}
-                          </p>
-                          <p style={{ fontSize: "11px", letterSpacing: "0.03em", color: "#8A8A96", marginTop: "12px" }}>
-                            {p.role}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-baseline justify-between gap-3 mt-5">
-                        <h3 style={{ fontSize: "16px", color: "#F2EFE8", fontWeight: 400 }}>{p.name}</h3>
-                        <span style={{ fontSize: "13px", color: "#52525C" }}>{p.year}</span>
-                      </div>
-                      <p style={{ fontSize: "13px", color: "#8A8A96", marginTop: "4px" }}>{p.location}</p>
-                    </article>
+                    <ProjectCard key={p.name + p.year} p={p} />
                   ))}
                 </div>
               </div>

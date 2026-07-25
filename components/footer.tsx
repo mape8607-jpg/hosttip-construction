@@ -1,6 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import { Mail } from "lucide-react";
+
+function InstagramIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
 
 const links = [
   { label: "Proceso", href: "#proceso" },
@@ -37,6 +57,32 @@ export default function Footer() {
             >
               León, Guanajuato · México
             </p>
+
+            <div className="flex items-center gap-4 mt-2">
+              <a
+                href="https://instagram.com/hosttip"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="transition-colors duration-200"
+                style={{ color: "#52525C" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#C9A55A")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#52525C")}
+              >
+                <InstagramIcon size={18} />
+              </a>
+              <a
+                href="mailto:contacto@hosttip.com"
+                aria-label="Correo"
+                className="inline-flex items-center gap-2 transition-colors duration-200"
+                style={{ color: "#52525C", fontSize: "13px" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#C9A55A")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#52525C")}
+              >
+                <Mail size={16} strokeWidth={1.5} />
+                contacto@hosttip.com
+              </a>
+            </div>
           </div>
 
           {/* Nav links */}

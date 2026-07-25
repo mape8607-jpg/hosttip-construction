@@ -96,11 +96,23 @@ export default function Hero() {
         </h1>
 
         <p
-          className="mt-8 mb-14"
+          className="mt-8 mb-2"
+          style={{
+            fontSize: "17px",
+            color: "#F2EFE8",
+            fontWeight: 500,
+            textDecoration: "underline",
+            textUnderlineOffset: "5px",
+            textDecorationColor: "#8A8A96",
+          }}
+        >
+          Diseño y Obra
+        </p>
+        <p
+          className="mb-14"
           style={{ fontSize: "16px", lineHeight: "1.7", color: "#8A8A96", maxWidth: "42ch", fontWeight: 300 }}
         >
-          Construimos obra residencial y comercial, y ejecutamos remodelaciones.
-          Siempre empezamos entendiendo el proyecto para tomar mejores decisiones.
+          Residencial, comercial, remodelaciones y adecuaciones
         </p>
 
         <a

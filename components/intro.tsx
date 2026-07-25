@@ -41,9 +41,9 @@ export default function Intro() {
       style={{
         backgroundColor: "#0C0C0E",
         opacity: fading ? 0 : 1,
-        filter: fading ? "blur(24px)" : "blur(0px)",
+        filter: fading ? "blur(14px)" : "blur(0px)",
         pointerEvents: fading ? "none" : "auto",
-        transition: "opacity 2000ms cubic-bezier(0.4, 0, 0.2, 1), filter 2000ms cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: "opacity 2000ms cubic-bezier(0.7, 0, 1, 1), filter 2000ms cubic-bezier(0.7, 0, 1, 1)",
       }}
       aria-hidden="true"
     >
@@ -58,7 +58,7 @@ export default function Intro() {
           opacity: entered ? 1 : 0,
           transform: fading ? "scale(1.3)" : entered ? "scale(1)" : "scale(0.94)",
           transition: fading
-            ? "transform 2000ms cubic-bezier(0.4, 0, 0.2, 1)"
+            ? "transform 2000ms cubic-bezier(0.7, 0, 1, 1)"
             : "opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       />

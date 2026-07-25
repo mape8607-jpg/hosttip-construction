@@ -29,11 +29,11 @@ function StepTitle({ step }: { step: (typeof steps)[number] }) {
     <div>
       <span
         className="font-light"
-        style={{ fontSize: "6.5px", color: "#C9A55A", marginBottom: "3px", display: "block" }}
+        style={{ fontSize: "19.5px", color: "#C9A55A", marginBottom: "9px", display: "block" }}
       >
         {step.id}
       </span>
-      <h3 style={{ fontSize: "8px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
+      <h3 style={{ fontSize: "24px", letterSpacing: "-0.01em", color: "#F2EFE8", fontWeight: 500 }}>
         {step.title}
       </h3>
     </div>

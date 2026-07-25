@@ -74,6 +74,7 @@ export default function Hero() {
             letterSpacing: "0.04em",
             color: "#0C0C0E",
             marginBottom: "28px",
+            fontWeight: 600,
           }}
         >
           León, Guanajuato

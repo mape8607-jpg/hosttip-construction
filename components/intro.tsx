@@ -50,12 +50,11 @@ export default function Intro() {
       <Image
         src="/logo.png"
         alt="HOSTTIP"
-        width={180}
-        height={60}
-        className="w-40 sm:w-52 h-auto"
+        width={400}
+        height={400}
+        className="w-56 sm:w-72 h-auto"
         priority
         style={{
-          filter: "brightness(0) invert(1)",
           opacity: entered ? 1 : 0,
           transform: fading ? "scale(1.3)" : entered ? "scale(1)" : "scale(0.94)",
           transition: fading

@@ -20,9 +20,9 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt="HOSTTIP"
-              width={100}
-              height={34}
-              className="h-7 w-auto"
+              width={140}
+              height={140}
+              className="h-16 w-auto"
             />
             <p style={{ fontSize: "13px", lineHeight: "1.7", color: "#52525C" }}>
               Construimos con criterio, no con inercia.

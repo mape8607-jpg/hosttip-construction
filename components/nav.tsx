@@ -24,17 +24,16 @@ export default function Nav() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#" className="flex items-center" aria-label="HOSTTIP inicio">
             <Image
               src="/logo.png"
               alt="HOSTTIP"
-              width={120}
-              height={40}
-              className="h-12 w-auto"
+              width={200}
+              height={200}
+              className="h-16 w-auto"
               priority
-              style={{ filter: "brightness(0) invert(1)" }}
             />
           </a>
 

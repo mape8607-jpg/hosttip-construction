@@ -72,7 +72,7 @@ export default function Hero() {
           style={{
             fontSize: "13px",
             letterSpacing: "0.04em",
-            color: "#C9A55A",
+            color: "#0C0C0E",
             marginBottom: "28px",
           }}
         >

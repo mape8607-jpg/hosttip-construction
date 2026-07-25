@@ -41,12 +41,12 @@ function StepCard({
     const el = captionRef.current;
     if (!el) return;
 
-    // Trigger right as the caption is about to scroll into view from the
-    // bottom, so the photo blurs and the text rises to sit over it.
-    // Reverses automatically when scrolling back up.
+    // Trigger the instant the "01" starts entering the viewport from the
+    // bottom, so the photo blurs and the text rises to sit over it right
+    // as it becomes visible. Reverses automatically when scrolling back up.
     const observer = new IntersectionObserver(
       ([entry]) => setActive(entry.isIntersecting),
-      { rootMargin: "0px 0px -78% 0px", threshold: 0 }
+      { rootMargin: "0px", threshold: 0 }
     );
     observer.observe(el);
     return () => observer.disconnect();

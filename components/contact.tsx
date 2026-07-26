@@ -16,7 +16,25 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = data.get("name") as string;
+    const phone = data.get("phone") as string;
+    const typeSelect = form.querySelector("#type") as HTMLSelectElement;
+    const typeLabel = typeSelect.options[typeSelect.selectedIndex]?.text ?? "";
+    const description = data.get("description") as string;
+
+    const message = [
+      "Nuevo contacto desde hosttip.mx",
+      "",
+      `Nombre: ${name}`,
+      `Teléfono: ${phone}`,
+      `Tipo de proyecto: ${typeLabel}`,
+      `Descripción: ${description || "—"}`,
+    ].join("\n");
+
     setSent(true);
+    window.location.href = `https://wa.me/524774112011?text=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -109,10 +127,10 @@ export default function Contact() {
                   className="font-semibold mb-3"
                   style={{ fontSize: "20px", color: "#F2EFE8" }}
                 >
-                  Mensaje recibido.
+                  Te llevamos a WhatsApp.
                 </h3>
                 <p style={{ fontSize: "14px", color: "#8A8A96" }}>
-                  Nos comunicaremos contigo a la brevedad para coordinar la visita.
+                  Confirma el envío para que tu mensaje nos llegue directo.
                 </p>
               </div>
             ) : (

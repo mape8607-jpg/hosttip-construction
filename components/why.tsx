@@ -11,13 +11,13 @@ const pillars = [
   {
     tag: "WHY",
     title: "Por qué existimos",
-    body: "El valor ya existe, pero está disperso. Hay que descubrirlo y conectar las piezas. Creemos que cada espacio tiene un potencial que muchas veces permanece oculto. Nuestra pasión es descubrirlo y convertirlo en decisiones que generen más valor.",
+    body: "El valor ya existe, pero está disperso. Hay que descubrirlo y conectar las piezas. Creemos que cada espacio tiene un potencial que muchas veces permanece oculto.",
     list: null as string[] | null,
   },
   {
     tag: "HOW",
     title: "Cómo lo logramos",
-    body: "Orquestando talento con un propósito común, conectando visión, diseño, inversión y ejecución. Entendemos la visión de nuestros clientes para diseñar soluciones donde la arquitectura, la viabilidad financiera y la ejecución encuentran equilibrio, creando valor a largo plazo.",
+    body: "Entendemos la visión de nuestros clientes para diseñar soluciones donde la arquitectura, la viabilidad financiera y la ejecución encuentran equilibrio, creando valor a largo plazo.",
     list: null as string[] | null,
   },
   {
@@ -97,7 +97,7 @@ export default function Why() {
           >
             "Cada espacio merece ser entendido antes de intervenirse.
             Un buen diagnóstico permite tomar{" "}
-            <span style={{ color: "#F2EFE8", fontWeight: 500 }}>mejores decisiones desde el inicio.</span>"
+            <span style={{ color: "#F2EFE8", fontWeight: 500 }}>mejores decisiones.</span>"
           </blockquote>
         </div>
       </div>

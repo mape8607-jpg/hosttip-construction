@@ -83,7 +83,7 @@ function ProjectCard({ p }: { p: (typeof projects)[number] }) {
       onTouchStart={() => setActive(true)}
       onTouchEnd={() => setActive(false)}
     >
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 5", borderRadius: "4px" }}>
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3", borderRadius: "4px" }}>
         <Image
           src={p.image}
           alt={p.name}

@@ -18,6 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hosttip.mx"),
   title: "HOSTTIP · Construcción y Remodelación en León, Guanajuato",
   description:
     "Obra residencial y comercial, remodelaciones y diagnóstico estructural en León, Gto. Construimos con criterio.",
@@ -34,6 +35,21 @@ export const metadata: Metadata = {
       "Descubrimos, diseñamos y construimos con criterio estratégico. León, Guanajuato.",
     type: "website",
     locale: "es_MX",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "HOSTTIP",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HOSTTIP · Construcción y Remodelación",
+    description:
+      "Descubrimos, diseñamos y construimos con criterio estratégico. León, Guanajuato.",
+    images: ["/og-image.png"],
   },
 };
 

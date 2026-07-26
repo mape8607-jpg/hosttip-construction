@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hosttip.mx"),
-  title: "HOSTTIP · Construcción y Remodelación en León, Guanajuato",
+  title: "HOSTTIP-CONSTRUCTION",
   description:
     "Obra residencial y comercial, remodelaciones y diagnóstico estructural en León, Gto. Construimos con criterio.",
   keywords: [
